@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "adjustable_mime_type.gemspec",
      "lib/adjustable_mime_type.rb",
      "rails/init.rb",
      "spec/adjustable_mime_type_spec.rb",
