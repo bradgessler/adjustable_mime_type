@@ -1,6 +1,20 @@
-= adjustable_mime_type
+= Adjustable Mime Type Plugin
 
-Description goes here.
+One day I got sick and tired of constantly repeating myself while implementing various mime-type aliases like iPhone and iPad views. There are tutorials abound for doing something like:
+
+Why not move all of that stuff into config/initializers/mime_types.rb? That's exactly what I did, and it looks something like this:
+
+    Mime::Type.register_alias "text/html", :iphone do |req|
+      req.user_agent =~ /Mobile.*Safari/
+    end
+
+    Mime::Type.register_alias "text/html", :ipad do |req|
+      req.user_agent =~ /iPad/
+    end
+
+Now all of your mime-type stuff can be dealt with in one place while the plugin takes care of the request.
+
+*This has not been tested with Rails 3!*
 
 == Note on Patches/Pull Requests
  
