@@ -1,8 +1,6 @@
 = Adjustable Mime Type Plugin
 
-One day I got sick and tired of constantly repeating myself while implementing various mime-type aliases like iPhone and iPad views. There are tutorials abound for doing something like:
-
-Why not move all of that stuff into config/initializers/mime_types.rb? That's exactly what I did, and it looks something like this:
+One day I got sick and tired of constantly repeating myself while implementing various mime-type aliases like iPhone and iPad views so I made this possible:
 
     Mime::Type.register_alias "text/html", :iphone do |req|
       req.user_agent =~ /Mobile.*Safari/
@@ -12,9 +10,33 @@ Why not move all of that stuff into config/initializers/mime_types.rb? That's ex
       req.user_agent =~ /iPad/
     end
 
-Now all of your mime-type stuff can be dealt with in one place while the plugin takes care of the request.
+The old way of dealing with this looks something like:
 
-*This has not been tested with Rails 3!*
+    Mime::Type.register_alias "text/html", :iphone
+    
+Then adding a bunch of before_filters in the application controller like:
+    
+    before_filter :set_iphone_format
+    
+    def set_iphone_format
+      if get_head_method?
+        if is_iphone_request? || is_iphone_format? || is_iphone_subdomain?
+          request.format = cookies["browser"] == "desktop" ? :html : :iphone
+        end
+      end
+    end
+    
+    def is_iphone_format?
+      request.format.to_sym == :iphone
+    end
+
+    def is_iphone_request?
+      request.user_agent =~ /Mobile.*Safari/
+    end
+
+This plugin makes dealing with mime-type formats much more concise and moves the logic of dealing with those adjustments to one place.
+
+__This has not been tested with Rails 3!__
 
 == Note on Patches/Pull Requests
  
