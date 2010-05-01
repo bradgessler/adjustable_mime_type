@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "adjustable_mime_type"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Deal with mime-type aliases in Rails more concisely}
+    gem.description = %Q{This plugin moves the repetitive logic of adjusting mime-types from the controller into your project's mime-type declarations.}
     gem.email = "brad@bradgessler.com"
     gem.homepage = "http://github.com/bradgessler/adjustable_mime_type"
     gem.authors = ["Brad Gessler"]
